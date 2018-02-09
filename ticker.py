@@ -1,5 +1,6 @@
 import numpy as np
 import argparse
+import datetime
 import urllib.request
 
 
@@ -7,7 +8,6 @@ def get_data(symbol):
     url = "http://finance.google.com/finance/getprices?q={0}".format(symbol)
     url += "&i=300&p=1d&f=o,h,l,c"
     csv = urllib.request.urlopen(url).readlines()
-    print(url)
 
     # removing title headers and adding it to dataframe
     csv = np.asarray(csv[7:])
@@ -77,6 +77,10 @@ def main():
 
     args = vars(parser.parse_args())
     symbol = args['s'].upper()
+    CYELLOW = '\33[33m'
+    CEND = '\033[0m'
+    now = datetime.datetime.now()
+    print(CYELLOW + symbol + CEND + " for " + now.strftime("%Y-%m-%d"))
     plot_it(symbol)
 
 
