@@ -4,6 +4,7 @@
 ```
 python ticker.py -s aapl
 ```
+![image](https://github.com/Yatin-Kapur/stocli/blob/master/example.jpg)
 
 
 ## TODO:
