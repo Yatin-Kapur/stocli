@@ -50,6 +50,8 @@ def plot_it(symbol, interval):
     top, bottom = get_y(data)
     yaxis = np.linspace(top, bottom, 30)
     # close high low open
+    now = datetime.datetime.now()
+    print(CYELLOW + symbol + CEND + " for " + now.strftime("%Y-%m-%d"))
     for entry in yaxis:
         outstring = '' + str(round(entry, 1)) + ' '
         for price in data:
@@ -91,8 +93,6 @@ def main():
 
     symbol = symbol.upper()
     interval = 300 if not args['i'] else args['i']
-    now = datetime.datetime.now()
-    print(CYELLOW + symbol + CEND + " for " + now.strftime("%Y-%m-%d"))
     plot_it(symbol, interval)
 
 
