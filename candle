@@ -1,6 +1,8 @@
 #!/usr/bin/python
 
+import os.path
 import numpy as np
+import getpass
 import argparse
 import datetime
 from urllib2 import urlopen
@@ -81,20 +83,57 @@ def main():
     parser = argparse.ArgumentParser(description='Outputs stock chart of symbol\
                                      with the specified granularity \
                                      (defaults to 300s if none entered)')
-    parser.add_argument('-s', help='use to input the symbol for ticker',
-                        required=True)
-    parser.add_argument('-i',
-                        help='use to input the interval of data (seconds)',
+    parser.add_argument('-c', help='clear all of the symbols in list',
+                        required=False, action='store_true')
+    parser.add_argument('-a', help='add the following symbol to shortlist',
                         required=False)
+    parser.add_argument('-s', help='used to input the symbol for ticker',
+                        required=False)
+    parser.add_argument('-d', help='delete this symbol',
+                        required=False)
+    parser.add_argument('-i', help='input the interval of data (seconds)',
+                        required=False)
+
+    filename = "/usr/local/bin/" + getpass.getuser() + '-candle-list.txt'
+    if not os.path.isfile(filename):
+        f = open(filename, "w")
 
     args = vars(parser.parse_args())
     symbol = args['s']
     interval = args['i']
+    add = args['a']
+    delete = args['d']
+    clear = args['c']
 
-    symbol = symbol.upper()
     interval = 300 if not args['i'] else args['i']
-    plot_it(symbol, interval)
+    if symbol:
+        plot_it(symbol.upper(), interval)
+    if add:
+        f = open(filename, "r")
+        symbols = f.readlines()
+        if add.upper()+'\n' in symbols:
+            print(CYELLOW + add.upper() + CEND + " already in list!")
+        else:
+            f = open(filename, "a")
+            f.write(add.upper()+'\n')
+    if clear:
+        f = open(filename, "w")
+        f.write("")
+    if delete:
+        f = open(filename, "r")
+        symbols = f.readlines()
+        if delete.upper()+'\n' in symbols:
+            symbols.remove(delete.upper()+'\n')
+            f = open(filename, "w")
+            for symbol in symbols:
+                f.write(symbol)
 
+    if not symbol and not add:
+        f = open(filename, "r")
+        symbols = f.readlines()
+        for symbol in symbols:
+            if symbol:
+                plot_it(symbol[:-1], interval)
 
 if __name__ == "__main__":
     main()

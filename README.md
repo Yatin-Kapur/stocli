@@ -18,4 +18,3 @@ Data from googlefinance
 
 ## TODO:
 * add x axis
-* add short list feature
