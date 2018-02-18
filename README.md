@@ -8,7 +8,7 @@ $ curl https://raw.githubusercontent.com/Yatin-Kapur/stocli/master/candle > cand
 $ chmod +x candle
 ```
 
-## Usage
+## Running
 
 Displaying all charts from shortlist
 ```
