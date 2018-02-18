@@ -3,9 +3,9 @@ Command line tool to show candlestick-esque tickers for stocks
 
 ## Installation
 ```
-cd /usr/local/bin
-curl https://raw.githubusercontent.com/Yatin-Kapur/stocli/master/candle > candle
-chmod +x candle
+$ cd /usr/local/bin
+$ curl https://raw.githubusercontent.com/Yatin-Kapur/stocli/master/candle > candle
+$ chmod +x candle
 ```
 
 ## Usage
