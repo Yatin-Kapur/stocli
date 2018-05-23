@@ -1,4 +1,4 @@
-# stocli
+# Candle
 Command line tool to show candlestick-esque tickers for stocks
 
 ## Installation
